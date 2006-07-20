@@ -55,7 +55,6 @@ END_TESTS
 sub runtests {
   my %arg = @_;
 
-  $arg{strip_comments} = 1;
   $arg{wrap_in_html} = 1;
   $arg{base_uri} ||= 'http://www.test.com';
   my $minimal = $arg{minimal} || 0;
@@ -76,6 +75,13 @@ sub runtests {
     $test =~ s/^(.*?)\n//; my $name = $1;
     my( $html, $wiki ) = split /__W__\n/, $test;
     $html =~ s/__H__\n//;
+
+    $name =~ s{\s*\:\:(\w+\([^\)]*?\))}{
+      my $method_call = $1;
+      eval "\$wc->$method_call;";
+      die "Failed test call ($name): $@" if $@;
+      '';
+    }ge;
 
     for( $html, $wiki ) { s/^\n+//; s/\n+$// }
     is( $wc->html2wiki($html), $wiki, $name );

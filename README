@@ -1,5 +1,5 @@
-HTML::WikiConverter::PmWiki version 0.50
-========================================
+HTML::WikiConverter::PmWiki
+===========================
 
 HTML::WikiConverter::PmWiki adds the PmWiki dialect to
 HTML::WikiConverter allowing the conversion of HTML to PmWiki markup.
@@ -20,21 +20,11 @@ There's also a web interface if you're so inclined:
 
   http://diberri.dyndns.org/html2wiki.html
 
-VERSION
+CHANGES IN 0.51
 
-This is HTML::WikiConverter::PmWiki 0.50.
-
-Prior versions of HTML::WikiConverter supported the PmWiki dialect out
-of the box. As of 0.50, each dialect was branched off into a separate
-CPAN package.
-
-CHANGES IN 0.50
-
-  * PmWiki dialect now has its own CPAN package
-
-DEPENDENCIES
-
-  * HTML::WikiConverter version 0.50
+  * (bug 18562) Line breaks converted to "[[<<]]" within tables (thanks pcascon)
+  * (bug 18287) Fixed <br> tag problem in connection with new line in HTML
+  * Require HTML::WikiConverter 0.60
 
 INSTALLATION
 

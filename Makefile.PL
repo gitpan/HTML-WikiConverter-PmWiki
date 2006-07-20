@@ -10,7 +10,7 @@ WriteMakefile(
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,
-        'HTML::WikiConverter' => 0.50,
+        'HTML::WikiConverter' => 0.60,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'HTML-WikiConverter-PmWiki-*' },

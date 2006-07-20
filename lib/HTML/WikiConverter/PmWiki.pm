@@ -5,7 +5,7 @@ use strict;
 
 use base 'HTML::WikiConverter';
 
-our $VERSION = '0.50';
+our $VERSION = '0.51';
 
 =head1 NAME
 
@@ -27,7 +27,7 @@ L<HTML::WikiConverter> for additional usage details.
 sub rules {
   my %rules = (
     hr => { replace => "\n----\n" },
-    br => { replace => " \\\\\n" },
+    br => { replace => \&_br },
 
     h1 => { start => '! ',      block => 1, trim => 'both', line_format => 'single' },
     h2 => { start => '!! ',     block => 1, trim => 'both', line_format => 'single' },
@@ -72,6 +72,12 @@ sub rules {
   );
 
   return \%rules;
+}
+
+sub _br {
+  my( $self, $node, $rules ) = @_;
+  return " [[<<]] " if $node->look_up( _tag => 'table' );
+  return " \\\\\n";
 }
 
 sub _table_start {
@@ -151,6 +157,10 @@ sub preprocess_node {
   my $tag = $node->tag || '';
   $self->_move_aname($node) if $tag eq 'a' and $node->attr('name');
   $self->caption2para($node) if $tag eq 'caption';
+  if( $tag eq '~text' and $node->left and $node->left->tag and $node->left->tag eq 'br' and !$node->look_up(_tag => 'pre') ) {
+    ( my $text = $node->attr('text') ) =~ s/^\s+//;
+    $node->attr( text => $text );
+  }
 }
 
 sub _move_aname {

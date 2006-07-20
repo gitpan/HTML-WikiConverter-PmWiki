@@ -297,3 +297,11 @@ __W__
    is pre-
       formatted tex'^t^'
          with '''special''' {-formatting-}
+__NEXT__
+br on separate lines (bug #18287)
+__H__
+line1<br>
+line2
+__W__
+line1 \\
+line2

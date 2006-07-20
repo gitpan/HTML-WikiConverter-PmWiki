@@ -10,11 +10,16 @@ all_pod_coverage_ok( { also_private => [
     |get_wiki_page
     |get_attr_str
     |is_camel_case
+    |rule
+    |rules
+    |attribute
     |attributes
+    |preprocess_tree
     |preprocess_node
     |postprocess_output
     |caption2para
     |strip_aname
-    |rules
+    |base_url
+    |wiki_url
   /x
 ] } );
